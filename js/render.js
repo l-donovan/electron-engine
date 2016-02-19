@@ -16,7 +16,7 @@ var depthFactor = math.e;
 
 class Point3D {
   constructor(x, y, z) {
-    this.posX = ((this.posX == 0) ? Number.MIN_VALUE : x); // Prevents "divide by zero" errors
+    this.posX = ((x == 0) ? Number.MIN_VALUE : x); // Prevents "divide by zero" errors
     this.posY = y;
     this.posZ = z;
 
