@@ -53,7 +53,7 @@ function drawToPoint(p, y, z) {
     cursorPosY = getCanvasPointY(p.drawY);
   } else {
     cursorPosX = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.cos(math.atan(y / p)));
-    cursorPosY = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
+    cursorPosY = getCanvasPointY(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
   }
   renderContext.lineTo(cursorPosX, cursorPosY);
   renderContext.stroke();
@@ -65,7 +65,7 @@ function moveToPoint(p, y, z) {
     cursorPosY = getCanvasPointY(p.drawY);
   } else {
     cursorPosX = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.cos(math.atan(y / p)));
-    cursorPosY = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
+    cursorPosY = getCanvasPointY(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
   }
 }
 
