@@ -45,18 +45,28 @@ function drawBackground(c) {
   renderContext.fill();
 }
 
-function drawToPoint(p) {
+function drawToPoint(p, y, z) {
   renderContext.beginPath();
   renderContext.moveTo(cursorPosX, cursorPosY);
-  cursorPosX = getCanvasPointX(p.drawX);
-  cursorPosY = getCanvasPointY(p.drawY)
+  if (typeof y === "undefined" && typeof z === "undefined"){
+    cursorPosX = getCanvasPointX(p.drawX);
+    cursorPosY = getCanvasPointY(p.drawY);
+  } else {
+    cursorPosX = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.cos(math.atan(y / p)));
+    cursorPosY = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
+  }
   renderContext.lineTo(cursorPosX, cursorPosY);
   renderContext.stroke();
 }
 
-function moveToPoint(p) {
-  cursorPosX = getCanvasPointX(p.drawX);
-  cursorPosY = getCanvasPointY(p.drawY);
+function moveToPoint(p, y, z) {
+  if (typeof y === "undefined" && typeof z === "undefined"){
+    cursorPosX = getCanvasPointX(p.drawX);
+    cursorPosY = getCanvasPointY(p.drawY);
+  } else {
+    cursorPosX = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.cos(math.atan(y / p)));
+    cursorPosY = getCanvasPointX(math.sign(p) * math.pow(depthFactor, z) * math.sin(math.atan(y / p)));
+  }
 }
 
 function renderInit() {
@@ -72,11 +82,11 @@ function draw() {
   drawToPoint(new Point3D(2, -1, 3));
   drawToPoint(new Point3D(2, 1, 3));
 
-  moveToPoint(new Point3D(2, 1, 4));
-  drawToPoint(new Point3D(2, 1, 5));
-  drawToPoint(new Point3D(2, -1, 5));
-  drawToPoint(new Point3D(2, -1, 4));
-  drawToPoint(new Point3D(2, 1, 4));
+  moveToPoint(2, 1, 4);
+  drawToPoint(2, 1, 5);
+  drawToPoint(2, -1, 5);
+  drawToPoint(2, -1, 4);
+  drawToPoint(2, 1, 4);
 
   moveToPoint(new Point3D(-2, 1, 3));
   drawToPoint(new Point3D(-2, 1, 4));
