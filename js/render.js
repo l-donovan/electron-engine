@@ -8,6 +8,21 @@ class Scene3D {
     this.camera = camera;
     this.viewer = viewer;
     this.ctx = canvas.getContext("2d");
+    this.updateTrig();
+  }
+
+  maximizeCanvas() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+
+  updateTrig() {
+    this.sX = math.sin(this.camera.aX);
+    this.cX = math.cos(this.camera.aX);
+    this.sY = math.sin(this.camera.aY);
+    this.cY = math.cos(this.camera.aY);
+    this.sZ = math.sin(this.camera.aZ);
+    this.cZ = math.cos(this.camera.aZ);
   }
 
   drawBackground(color) {
@@ -17,35 +32,29 @@ class Scene3D {
     this.ctx.fill();
   }
 
-  maximizeCanvas() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
+  calcP(point) {
+    var x = point.posX - this.camera.posX;
+    var y = point.posY - this.camera.posY;
+    var z = point.posZ - this.camera.posZ;
 
-  calcX(p) {
-    var x = p.posX - this.camera.posX;
-    var y = p.posY - this.camera.posY;
-    var z = p.posZ - this.camera.posZ;
+    var i1 = this.sZ * y + this.cZ * x;
+    var i2 = this.cZ * y - this.sZ * x;
+    var i3 = this.cY * z + this.sY * i1;
 
-    var dz = math.cos(this.camera.aX) * (math.cos(this.camera.aY) * z + math.sin(this.camera.aY) * (math.sin(this.camera.aZ) * y + math.cos(this.camera.aZ) * x)) - math.sin(this.camera.aX) * (math.cos(this.camera.aZ) * y - math.sin(this.camera.aZ) * x);
-    var dx = math.cos(this.camera.aY) * (math.sin(this.camera.aZ) * y + math.cos(this.camera.aZ) * x) - math.sin(this.camera.aY) * z;
-    return (this.viewer.posZ / dz) * dx - this.viewer.posX;
-  }
+    var dx = this.cY * i1 - this.sY * z;
+    var dy = this.sX * i3 + this.cX * i2;
+    var dz = this.cX * i3 - this.sX * i2;
 
-  calcY(p) {
-    var x = p.posX - this.camera.posX;
-    var y = p.posY - this.camera.posY;
-    var z = p.posZ - this.camera.posZ;
-
-    var dz = math.cos(this.camera.aX) * (math.cos(this.camera.aY) * z + math.sin(this.camera.aY) * (math.sin(this.camera.aZ) * y + math.cos(this.camera.aZ) * x)) - math.sin(this.camera.aX) * (math.cos(this.camera.aZ) * y - math.sin(this.camera.aZ) * x);
-    var dy = math.sin(this.camera.aX) * (math.cos(this.camera.aY) * z + math.sin(this.camera.aY) * (math.sin(this.camera.aZ) * y + math.cos(this.camera.aZ) * x)) + math.cos(this.camera.aX) * (math.cos(this.camera.aZ) * y - math.sin(this.camera.aZ) * x);
-    return (this.viewer.posZ / dz) * dy - this.viewer.posY;
+    return [(this.viewer.posZ / dz) * dx - this.viewer.posX, (this.viewer.posZ / dz) * dy - this.viewer.posY];
   }
 
   drawLine(p1, p2) {
+    p1 = this.calcP(p1);
+    p2 = this.calcP(p2);
+
     this.ctx.beginPath();
-    this.ctx.moveTo(this.calcX(p1), this.calcY(p1));
-    this.ctx.lineTo(this.calcX(p2), this.calcY(p2));
+    this.ctx.moveTo(p1[0], p1[1]);
+    this.ctx.lineTo(p2[0], p2[1]);
     this.ctx.stroke();
   }
 }
