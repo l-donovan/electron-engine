@@ -1,9 +1,5 @@
 "use strict";
 
-// This is an example of rendering a basic one-point
-// perspective, with a vanishing point in the top left
-// of the canvas.
-
 var math = require("mathjs");
 
 class Scene3D {
@@ -79,34 +75,4 @@ class Point3D {
     this.posY = y;
     this.posZ = z;
   }
-}
-
-// PLEASE NOTE:
-// This is not how you would ever set up
-// a scene to be declared, with all of
-// the helper "viewerXYZ" functions and
-// such. For demonstration purposes only.
-
-var canvas = document.getElementById("render");
-var viewer = new Viewer3D(0, 0, 10);
-var camera = new Camera3D(0, 0, 0, 0, 0, 0);
-var scene = new Scene3D(canvas, camera, viewer);
-scene.maximizeCanvas();
-
-function viewerX(inc) {scene.viewer.posX += inc;draw();}
-function viewerY(inc) {scene.viewer.posY += inc;draw();}
-function viewerZ(inc) {scene.viewer.posZ += inc;draw();}
-function cameraX(inc) {scene.camera.posX += inc;draw();}
-function cameraY(inc) {scene.camera.posY += inc;draw();}
-function cameraZ(inc) {scene.camera.posZ += inc;draw();}
-function cameraAX(inc) {scene.camera.aX += inc;draw();}
-function cameraAY(inc) {scene.camera.aY += inc;draw();}
-function cameraAZ(inc) {scene.camera.aZ += inc;draw();}
-
-function draw() {
-  scene.drawBackground("#AAA");
-  scene.drawLine(new Point3D(100, 100, 3), new Point3D(100, 100, 9));
-  scene.drawLine(new Point3D(100, 100, 5), new Point3D(100, 50, 5));
-  scene.drawLine(new Point3D(100, 100, 7), new Point3D(100, 50, 7));
-  scene.drawLine(new Point3D(100, 50, 5), new Point3D(100, 50, 7));
 }
