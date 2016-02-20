@@ -93,50 +93,15 @@ var camera = new Camera3D(0, 0, 0, 0, 0, 0);
 var scene = new Scene3D(canvas, camera, viewer);
 scene.maximizeCanvas();
 
-function viewerX(inc) {
-  scene.viewer.posX += inc;
-  draw();
-}
-
-function viewerY(inc) {
-  scene.viewer.posY += inc;
-  draw();
-}
-
-function viewerZ(inc) {
-  scene.viewer.posZ += inc;
-  draw();
-}
-
-function cameraX(inc) {
-  scene.camera.posX += inc;
-  draw();
-}
-
-function cameraY(inc) {
-  scene.camera.posY += inc;
-  draw();
-}
-
-function cameraZ(inc) {
-  scene.camera.posZ += inc;
-  draw();
-}
-
-function cameraAX(inc) {
-  scene.camera.aX += inc;
-  draw();
-}
-
-function cameraAY(inc) {
-  scene.camera.aY += inc;
-  draw();
-}
-
-function cameraAZ(inc) {
-  scene.camera.aZ += inc;
-  draw();
-}
+function viewerX(inc) {scene.viewer.posX += inc;draw();}
+function viewerY(inc) {scene.viewer.posY += inc;draw();}
+function viewerZ(inc) {scene.viewer.posZ += inc;draw();}
+function cameraX(inc) {scene.camera.posX += inc;draw();}
+function cameraY(inc) {scene.camera.posY += inc;draw();}
+function cameraZ(inc) {scene.camera.posZ += inc;draw();}
+function cameraAX(inc) {scene.camera.aX += inc;draw();}
+function cameraAY(inc) {scene.camera.aY += inc;draw();}
+function cameraAZ(inc) {scene.camera.aZ += inc;draw();}
 
 function draw() {
   scene.drawBackground("#AAA");
