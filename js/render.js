@@ -1,7 +1,5 @@
 "use strict";
 
-var math = require("mathjs");
-
 class Scene3D {
   constructor(canvas, camera, viewer) {
     this.canvas = canvas;
@@ -17,12 +15,12 @@ class Scene3D {
   }
 
   updateTrig() {
-    this.sX = math.sin(this.camera.aX);
-    this.cX = math.cos(this.camera.aX);
-    this.sY = math.sin(this.camera.aY);
-    this.cY = math.cos(this.camera.aY);
-    this.sZ = math.sin(this.camera.aZ);
-    this.cZ = math.cos(this.camera.aZ);
+    this.sX = Math.sin(this.camera.aX);
+    this.cX = Math.cos(this.camera.aX);
+    this.sY = Math.sin(this.camera.aY);
+    this.cY = Math.cos(this.camera.aY);
+    this.sZ = Math.sin(this.camera.aZ);
+    this.cZ = Math.cos(this.camera.aZ);
   }
 
   drawBackground(color) {
@@ -32,7 +30,7 @@ class Scene3D {
     this.ctx.fill();
   }
 
-  calcP(point) {
+  calcPoint(point) {
     var x = point.posX - this.camera.posX;
     var y = point.posY - this.camera.posY;
     var z = point.posZ - this.camera.posZ;
@@ -45,12 +43,13 @@ class Scene3D {
     var dy = this.sX * i3 + this.cX * i2;
     var dz = this.cX * i3 - this.sX * i2;
 
-    return [(this.viewer.posZ / dz) * dx - this.viewer.posX, (this.viewer.posZ / dz) * dy - this.viewer.posY];
+    return [(this.viewer.posZ / dz) * dx - this.viewer.posX,
+            (this.viewer.posZ / dz) * dy - this.viewer.posY];
   }
 
   drawLine(p1, p2) {
-    p1 = this.calcP(p1);
-    p2 = this.calcP(p2);
+    p1 = this.calcPoint(p1);
+    p2 = this.calcPoint(p2);
 
     this.ctx.beginPath();
     this.ctx.moveTo(p1[0], p1[1]);
