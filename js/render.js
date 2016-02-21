@@ -71,9 +71,8 @@ class Scene3D {
 
     for (var y = yMin; y < yMax; y++) {
       for (var x = xMin; x < xMax; x++) {
-        if (pointInPolygon([x, y], polygon)) {
+        if (pointInPolygon([x, y], polygon))
           this.ctx.putImageData(px, x, y);
-        }
       }
     }
   }
