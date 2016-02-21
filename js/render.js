@@ -1,5 +1,7 @@
 "use strict";
 
+var pointInPolygon = require('point-in-polygon');
+
 class Scene3D {
   constructor(canvas, camera, viewer) {
     this.canvas = canvas;
@@ -55,6 +57,25 @@ class Scene3D {
     this.ctx.moveTo(p1[0], p1[1]);
     this.ctx.lineTo(p2[0], p2[1]);
     this.ctx.stroke();
+  }
+
+  fill(polygon) {
+    polygon = polygon.map(p => this.calcPoint(p));
+
+    var xMin = Math.min(...polygon.map(p => p[0]));
+    var xMax = Math.max(...polygon.map(p => p[0]));
+    var yMin = Math.min(...polygon.map(p => p[1]));
+    var yMax = Math.max(...polygon.map(p => p[1]));
+
+    var px = this.ctx.createImageData(1, 1);
+
+    for (var y = yMin; y < yMax; y++) {
+      for (var x = xMin; x < xMax; x++) {
+        if (pointInPolygon([x, y], polygon)) {
+          this.ctx.putImageData(px, x, y);
+        }
+      }
+    }
   }
 }
 

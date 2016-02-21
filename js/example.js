@@ -17,8 +17,14 @@ function cameraAZ(inc) {scene.camera.aZ += inc; scene.updateTrig(); drawScene();
 
 function drawScene() {
   scene.drawBackground("#CCC");
-  scene.drawLine(new Point3D(100, 100, 3), new Point3D(100, 100, 9));
+
   scene.drawLine(new Point3D(100, 100, 5), new Point3D(100, 50, 5));
-  scene.drawLine(new Point3D(100, 100, 7), new Point3D(100, 50, 7));
   scene.drawLine(new Point3D(100, 50, 5), new Point3D(100, 50, 7));
+  scene.drawLine(new Point3D(100, 50, 7), new Point3D(100, 100, 7));
+  scene.drawLine(new Point3D(100, 100, 7), new Point3D(100, 100, 5));
+
+  scene.fill([new Point3D(100, 100, 5),
+              new Point3D(100, 50, 5),
+              new Point3D(100, 50, 7),
+              new Point3D(100, 100, 7)]);
 }
