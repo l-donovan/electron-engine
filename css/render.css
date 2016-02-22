@@ -5,9 +5,18 @@ html, body {
   overflow: hidden;
 }
 
-#controlContainer {
+#leftControlContainer, #rightControlContainer {
   position: absolute;
   bottom: 0;
-  left: 0;
+  font-family: monospace;
+}
+
+#leftControlContainer { left: 0; }
+#rightControlContainer { right: 0; }
+
+#fpsContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
   font-family: monospace;
 }

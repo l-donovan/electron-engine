@@ -23,8 +23,27 @@ function drawScene() {
   scene.drawLine(new Point3D(100, 50, 7), new Point3D(100, 100, 7));
   scene.drawLine(new Point3D(100, 100, 7), new Point3D(100, 100, 5));
 
+  scene.drawLine(new Point3D(100, 100, 2), new Point3D(100, 100, 10));
+  scene.drawLine(new Point3D(50, 100, 2), new Point3D(50, 100, 10));
+
   scene.fill([new Point3D(100, 100, 5),
               new Point3D(100, 50, 5),
               new Point3D(100, 50, 7),
-              new Point3D(100, 100, 7)]);
+              new Point3D(100, 100, 7)],
+              "#CC4444");
+
+  scene.fill([new Point3D(50, 100, 7),
+              new Point3D(100, 100, 7),
+              new Point3D(100, 50, 7),
+              new Point3D(50, 50, 7)],
+              "#44CCCC");
+}
+
+function demo(tick) {
+  setInterval(function() {
+    cameraX(0.04);
+    cameraY(0.04);
+    var fps = (1000. / executionTime(drawScene)).toFixed(2);
+    document.getElementById("fps").innerHTML = fps;
+  }, 1000. / tick);
 }
