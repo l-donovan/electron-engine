@@ -1,7 +1,11 @@
 "use strict";
 
+var $ = require("jquery")
+
 class Scene3D {
   constructor(canvas, camera, viewer) {
+    this.draw = function() {};
+    this.keyStates = [];
     this.canvas = canvas;
     this.camera = camera;
     this.viewer = viewer;
@@ -66,6 +70,67 @@ class Scene3D {
       this.ctx.lineTo(polygon[i][0], polygon[i][1]);
     this.ctx.closePath();
     this.ctx.fill();
+  }
+
+  viewerX(inc) {
+    this.viewer.posX += inc;
+    this.updateTrig();
+  }
+
+  viewerY(inc) {
+    this.viewer.posY += inc;
+    this.updateTrig();
+  }
+
+  viewerZ(inc) {
+    this.viewer.posZ += inc;
+    this.updateTrig();
+  }
+
+  cameraX(inc) {
+    this.camera.posX += inc;
+    this.updateTrig();
+  }
+
+  cameraY(inc) {
+    this.camera.posY += inc;
+    this.updateTrig();
+  }
+
+  cameraZ(inc) {
+    this.camera.posZ += inc;
+    this.updateTrig();
+  }
+
+  cameraAX(inc) {
+    this.camera.aX += inc;
+    this.updateTrig();
+  }
+
+  cameraAY(inc) {
+    this.camera.aY += inc;
+    this.updateTrig();
+  }
+
+  cameraAZ(inc) {
+    this.camera.aZ += inc;
+    this.updateTrig();
+  }
+
+  checkKeys() {
+    var t = this;
+
+    $("body").keydown(function(e) {
+      t.keyStates[e.keyCode] = 1;
+    });
+
+    $("body").keyup(function(e) {
+      t.keyStates[e.keyCode] = 0;
+    });
+  }
+
+  getKeyState(key) {
+    return this.keyStates[key];
   }
 }
 

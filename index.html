@@ -8,20 +8,14 @@
   <body>
     <canvas id="render"></canvas>
     <div id="leftControlContainer">
-      Viewer Pos: <button onclick="viewerX(-1)">←</button><button onclick="viewerX(1)">→</button><button onclick="viewerY(-1)">↑</button><button onclick="viewerY(1)">↓</button><button onclick="viewerZ(-1)">↖</button><button onclick="viewerZ(1)">↘</button><br>
-      Camera Pos: <button onclick="cameraX(-1)">←</button><button onclick="cameraX(1)">→</button><button onclick="cameraY(-1)">↑</button><button onclick="cameraY(1)">↓</button><button onclick="cameraZ(-1)">↖</button><button onclick="cameraZ(1)">↘</button><br>
-      Camera Rot: <button onclick="cameraAX(-0.01)">←</button><button onclick="cameraAX(0.01)">→</button><button onclick="cameraAY(-0.01)">↑</button><button onclick="cameraAY(0.01)">↓</button><button onclick="cameraAZ(-0.01)">↖</button><button onclick="cameraAZ(0.01)">↘</button>
-    </div>
-    <div id="rightControlContainer">
-      <button onclick="demo(100);">Demo</button>
-    </div>
-    <div id="fpsContainer">
-      <p id="fps">0.00</p>
+      Viewer Pos: <button onclick="scene.viewerX(-1)">←</button><button onclick="scene.viewerX(1)">→</button><button onclick="scene.viewerY(-1)">↑</button><button onclick="scene.viewerY(1)">↓</button><button onclick="scene.viewerZ(-1)">↖</button><button onclick="scene.viewerZ(1)">↘</button><br>
+      Camera Pos: <button onclick="scene.cameraX(-1)">←</button><button onclick="scene.cameraX(1)">→</button><button onclick="scene.cameraY(-1)">↑</button><button onclick="scene.cameraY(1)">↓</button><button onclick="scene.cameraZ(-1)">↖</button><button onclick="scene.cameraZ(1)">↘</button><br>
+      Camera Rot: <button onclick="scene.cameraAX(-0.01)">←</button><button onclick="scene.cameraAX(0.01)">→</button><button onclick="scene.cameraAY(-0.01)">↑</button><button onclick="scene.cameraAY(0.01)">↓</button><button onclick="scene.cameraAZ(-0.01)">↖</button><button onclick="scene.cameraAZ(0.01)">↘</button>
     </div>
     <script src="js/render.js"></script>
     <script src="js/example.js"></script>
     <script>
-      console.log(executionTime(drawScene));
+      mainLoop(100);
     </script>
   </body>
 </html>

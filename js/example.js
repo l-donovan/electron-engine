@@ -5,17 +5,7 @@ var scene = new Scene3D(canvas, camera, viewer);
 
 scene.maximizeCanvas();
 
-function viewerX(inc) {scene.viewer.posX += inc; scene.updateTrig(); drawScene();}
-function viewerY(inc) {scene.viewer.posY += inc; scene.updateTrig(); drawScene();}
-function viewerZ(inc) {scene.viewer.posZ += inc; scene.updateTrig(); drawScene();}
-function cameraX(inc) {scene.camera.posX += inc; scene.updateTrig(); drawScene();}
-function cameraY(inc) {scene.camera.posY += inc; scene.updateTrig(); drawScene();}
-function cameraZ(inc) {scene.camera.posZ += inc; scene.updateTrig(); drawScene();}
-function cameraAX(inc) {scene.camera.aX += inc; scene.updateTrig(); drawScene();}
-function cameraAY(inc) {scene.camera.aY += inc; scene.updateTrig(); drawScene();}
-function cameraAZ(inc) {scene.camera.aZ += inc; scene.updateTrig(); drawScene();}
-
-function drawScene() {
+scene.draw = function() {
   scene.drawBackground("#CCC");
 
   scene.drawLine(new Point3D(100, 100, 5), new Point3D(100, 50, 5));
@@ -39,11 +29,13 @@ function drawScene() {
               "#44CCCC");
 }
 
-function demo(tick) {
+function mainLoop(tickLength) {
   setInterval(function() {
-    cameraX(0.04);
-    cameraY(0.04);
-    var fps = (1000. / executionTime(drawScene)).toFixed(2);
-    document.getElementById("fps").innerHTML = fps;
-  }, 1000. / tick);
+    scene.checkKeys();
+    if (scene.getKeyState(37)) scene.cameraX(0.04);   // Left
+    if (scene.getKeyState(38)) scene.cameraY(0.04);   // Up
+    if (scene.getKeyState(39)) scene.cameraX(-0.04);  // Right
+    if (scene.getKeyState(40)) scene.cameraY(-0.04);  // Down
+    scene.draw();
+  }, 1000. / tickLength)
 }
